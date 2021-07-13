@@ -1,0 +1,34 @@
+<odoo>
+    
+    <record id="action_ii_wizard" model="ir.actions.act_window">
+        <field name="name">Factures Intersociété</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.intercompany</field>
+        <field name="search_view_id" ref="invoice_intercompany.wizard_invoice_intercompany"/>
+    <!--<field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/> -->
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="mneuitem_ii_parent" name="Facture intersociété" parent="account_accountant.menu_accounting"
+              groups="base.group_user" sequence="21"/>
+    
+    <menuitem id="mneuitem_ii" name="Générer les factures" parent="invoice_intercompany.mneuitem_ii_parent"
+              action="invoice_intercompany.action_ii_wizard" sequence="1" groups="base.group_user"/>
+    
+    <record id="view_move_form_ii_tabs" model="ir.ui.view">
+        <field name="name">view.move.form.ii.tabs</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@id='other_tab']" position="before">
+                <page string="Temps facturé" name="time_invoiced" attrs="{'invisible': [('account_analytic_line_ids', '=', False)]}">
+                    <field name="account_analytic_line_ids" nolabel="1"/>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

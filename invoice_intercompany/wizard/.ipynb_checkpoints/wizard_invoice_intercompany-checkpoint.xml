@@ -1,0 +1,19 @@
+<odoo>
+    <record id="wizard_invoice_intercompany" model="ir.ui.view">
+        <field name="name">Générer les sactures IS</field>
+        <field name="model">invoice.intercompany</field>
+        <field name="arch" type="xml">
+            <form string="Générer les factures">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                    </group>
+                    <footer>
+                        <button string="Générer" class="btn btn-primary" type="object" name="run" />
+                        <button string="Annuler" class="btn-secondary" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
